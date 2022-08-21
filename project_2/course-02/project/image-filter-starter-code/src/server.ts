@@ -32,13 +32,13 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
     try {
       let imageUrl: string = req.query.image_url
 
-      if (!imageUrl) res.status(400).send("image_url is required")
+      if (!imageUrl) res.status(400).send("image url is required")
 
-      const filePath = await filterImageFromURL(imageUrl)
+      const imageFilePath = await filterImageFromURL(imageUrl)
 
-      res.status(200).sendFile(filePath, () => deleteLocalFiles([filePath]))
+      res.status(200).sendFile(imageFilePath, () => deleteLocalFiles([imageFilePath]))
     } catch (error) {
-      res.status(422).send("cannot process image")
+      res.status(422).send("image cannot be processed")
     }
 
   })
